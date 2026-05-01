@@ -11,17 +11,14 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%231A1E24'/%3E%3Ctext x='90' y='118' text-anchor='middle' font-family='-apple-system,sans-serif' font-size='90' font-weight='700' fill='white'%3EL%3C/text%3E%3C/svg%3E">
 <title>ledger</title>
 <script>
-  // Apply theme IMMEDIATELY to prevent flash of mixed styles
+  // Aplicar tema dark sempre. Light desativado temporariamente.
   (function() {
     try {
       const saved = JSON.parse(localStorage.getItem('ledger_v1') || '{}');
-      let theme = saved.theme || 'dark';
-      if (theme === 'auto') {
-        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      }
-      document.documentElement.setAttribute('data-theme', theme);
+      // Sempre dark — ignoramos saved.theme até resolvermos light mode
+      document.documentElement.setAttribute('data-theme', 'dark');
       document.addEventListener('DOMContentLoaded', function() {
-        document.body.setAttribute('data-theme', theme);
+        document.body.setAttribute('data-theme', 'dark');
       });
       if (saved.accentColor) {
         document.documentElement.style.setProperty('--accent', saved.accentColor);
@@ -71,7 +68,7 @@ button { font-family: inherit; -webkit-appearance: none; appearance: none; color
 
 html {
 background: #0C1016;
-color: var(–text);
+color: #FFFFFF;
 font-family: -apple-system, BlinkMacSystemFont, ‘SF Pro Display’, ‘SF Pro Text’, sans-serif;
 -webkit-font-smoothing: antialiased;
 overflow-x: hidden;
@@ -79,9 +76,9 @@ min-height: 100vh;
 min-height: 100dvh;
 font-feature-settings: ‘ss02’;
 }
-[data-theme=“light”] html, html[data-theme=“light”] {
-background: #E6E9EF;
-}
+body { color: #FFFFFF; }
+[data-theme=“light”] html { background: #E6E9EF; color: #0E1116; }
+[data-theme=“light”] body { color: #0E1116; }
 
 /* Wallpaper fotográfico estilo Revolut - gradients múltiplos simulando tecido/seda iluminada */
 body {
@@ -1526,10 +1523,7 @@ font-weight: 500;
 </head>
 <body>
 <script>
-  (function() {
-    const theme = document.documentElement.getAttribute('data-theme') || 'dark';
-    document.body.setAttribute('data-theme', theme);
-  })();
+  document.body.setAttribute('data-theme', 'dark');
 </script>
 
 <!-- HOME -->
@@ -1769,7 +1763,7 @@ font-weight: 500;
   </div>
 
   <div style="padding: 20px 24px 16px; font-size: 12px; color: var(--text-3); text-align: center; line-height: 1.8; font-weight: 500;">
-    Ledger · v3.6<br/>
+    Ledger · v3.6.1<br/>
     Dados salvos localmente neste dispositivo
   </div>
 </div>
