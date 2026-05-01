@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="pt-BR" style="background:#0E1116;">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -20,11 +20,9 @@
         theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
       }
       document.documentElement.setAttribute('data-theme', theme);
-      // Set on body too once it exists
       document.addEventListener('DOMContentLoaded', function() {
         document.body.setAttribute('data-theme', theme);
       });
-      document.documentElement.style.setProperty('background', theme === 'light' ? '#F2F3F5' : '#0E1116');
       if (saved.accentColor) {
         document.documentElement.style.setProperty('--accent', saved.accentColor);
         const hex = saved.accentColor.replace('#','').match(/.{2}/g).map(h => parseInt(h, 16));
@@ -71,8 +69,8 @@ button { font-family: inherit; -webkit-appearance: none; appearance: none; color
 –text-inverse: #FFFFFF;
 }
 
-html, body {
-background: var(–bg);
+html {
+background: #0C1016;
 color: var(–text);
 font-family: -apple-system, BlinkMacSystemFont, ‘SF Pro Display’, ‘SF Pro Text’, sans-serif;
 -webkit-font-smoothing: antialiased;
@@ -81,6 +79,9 @@ min-height: 100vh;
 min-height: 100dvh;
 font-feature-settings: ‘ss02’;
 }
+[data-theme=“light”] html, html[data-theme=“light”] {
+background: #E6E9EF;
+}
 
 /* Wallpaper fotográfico estilo Revolut - gradients múltiplos simulando tecido/seda iluminada */
 body {
@@ -88,9 +89,6 @@ padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 110px);
 max-width: 520px;
 margin: 0 auto;
 position: relative;
-background-attachment: fixed;
-}
-body[data-theme=“dark”] {
 background:
 radial-gradient(ellipse 70% 50% at 50% 20%, rgba(150, 170, 210, 0.32), transparent 65%),
 radial-gradient(ellipse 90% 40% at 15% 10%, rgba(120, 145, 185, 0.22), transparent 55%),
@@ -1526,9 +1524,8 @@ font-weight: 500;
 </style>
 
 </head>
-<body style="color:#FFFFFF;">
+<body>
 <script>
-  // Garante data-theme no body assim que existe (antes de qualquer render)
   (function() {
     const theme = document.documentElement.getAttribute('data-theme') || 'dark';
     document.body.setAttribute('data-theme', theme);
@@ -1772,7 +1769,7 @@ font-weight: 500;
   </div>
 
   <div style="padding: 20px 24px 16px; font-size: 12px; color: var(--text-3); text-align: center; line-height: 1.8; font-weight: 500;">
-    Ledger · v3.5<br/>
+    Ledger · v3.6<br/>
     Dados salvos localmente neste dispositivo
   </div>
 </div>
